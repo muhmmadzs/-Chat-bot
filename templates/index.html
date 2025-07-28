@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>Company Chat Assistant</h1>
+      <div id="chat-container"></div>
+      <form id="chat-form" autocomplete="off">
+        <input
+          type="text"
+          id="user-input"
+          placeholder="Type your message..."
+          required
+        />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+
+    <script>
+      // Maintain the conversation history locally
+      const messages = [];
+      const chatContainer = document.getElementById("chat-container");
+      const form = document.getElementById("chat-form");
+      const userInput = document.getElementById("user-input");
+
+      // Function to append a message bubble
+      function appendMessage(role, content) {
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `message ${role}`;
+        messageDiv.textContent = content;
+        chatContainer.appendChild(messageDiv);
+        // Scroll to bottom
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const text = userInput.value.trim();
+        if (!text) return;
+
+        // Add user message to history and display
+        messages.push({ role: "user", content: text });
+        appendMessage("user", text);
+        userInput.value = "";
+
+        // Show a temporary message while waiting for the response
+        const loadingDiv = document.createElement("div");
+        loadingDiv.className = "message assistant loading";
+        loadingDiv.textContent = "Assistant is typing...";
+        chatContainer.appendChild(loadingDiv);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        try {
+          const response = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ messages }),
+          });
+          const data = await response.json();
+          // Remove loading indicator
+          chatContainer.removeChild(loadingDiv);
+
+          if (data.error) {
+            appendMessage(
+              "assistant",
+              `Error: ${data.error}`
+            );
+          } else {
+            const reply = data.response.trim();
+            messages.push({ role: "assistant", content: reply });
+            appendMessage("assistant", reply);
+          }
+        } catch (err) {
+          chatContainer.removeChild(loadingDiv);
+          appendMessage(
+            "assistant",
+            "An unexpected error occurred. Please try again later."
+          );
+          console.error(err);
+        }
+      });
+    </script>
+  </body>
+</html>
