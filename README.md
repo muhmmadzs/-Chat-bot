@@ -81,16 +81,8 @@ There are many frameworks (such as LangChain) that can help orchestrate retrieva
 
 ### Respectful and secure interactions
 
-When deploying chatbots in a company setting, it’s essential to prioritise respect, privacy, and security【750107192801164†L203-L229】.  Always explain what data is collected and why.  Limit the model’s responses to avoid sharing sensitive or personal information.  Provide an explicit opt‑out option for users if personal data is involved.  If your chatbot handles private data (such as HR or healthcare information), consult your legal and compliance teams to ensure GDPR and other regulations are followed.
+When deploying chatbots in a company setting, it’s essential to prioritise respect, privacy, and security.  Always explain what data is collected and why.  Limit the model’s responses to avoid sharing sensitive or personal information.  Provide an explicit opt‑out option for users if personal data is involved.  If your chatbot handles private data (such as HR or healthcare information), consult your legal and compliance teams to ensure GDPR and other regulations are followed.
 
-### User experience considerations
-
-Good UX design is critical for chatbot success.  According to industry research【750107192801164†L124-L143】:
-
-* **Balance effectiveness and efficiency** – A chatbot should both solve the user’s problem (effectiveness) and do so efficiently without unnecessary steps【750107192801164†L160-L196】.
-* **Set expectations** – Inform users what the chatbot can and cannot do.  Clarify if it may sometimes be wrong or hallucinate.
-* **Provide feedback mechanisms** – Encourage users to rate responses and suggest improvements.  Use this data to refine prompts and flows.
-* **Maintain context** – Make the chatbot aware of past interactions and user profiles to deliver more personalised responses【750107192801164†L233-L266】.
 
 ## Limitations
 
@@ -101,4 +93,4 @@ Good UX design is critical for chatbot success.  According to industry research�
 
 ## Acknowledgements
 
-This project draws on best practices from public guides on building chatbots and generative AI.  For example, the step‑by‑step guide from Elfsight emphasises setting up a proper development environment and writing code to interact with the OpenAI API【929793690084644†L291-L347】.  It also highlights the importance of testing and refining the bot with feedback【929793690084644†L419-L439】.  Additionally, research on custom GPT‑4 chatbots shows how using embeddings and proper prompts reduces hallucinations and provides relevant answers【619114781588450†L224-L257】.  Finally, UX guidelines remind us to balance effectiveness with efficiency and respect user privacy【750107192801164†L160-L196】.
+This project draws on best practices from public guides on building chatbots and generative AI. 
